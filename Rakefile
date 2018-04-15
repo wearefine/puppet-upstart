@@ -36,7 +36,6 @@ task :test => [
   :validate,
   :lint,
   :spec,
-  :metadata,
 ]
 
 desc "Validate manifests, templates, and ruby files"
@@ -50,9 +49,4 @@ task :validate do
   Dir["templates/**/*.erb"].each do |template|
     sh "erb -P -x -T '-' #{template} | ruby -c"
   end
-end
-
-desc "Lint metdata.json"
-task :metadata do
-  sh "metadata-json-lint metadata.json"
 end
