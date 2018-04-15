@@ -42,16 +42,16 @@ define upstart::job (
   require upstart
 
   validate_re($ensure, '^(present|absent)$',
-  'ensure must be "present" or "absent".')
+    'ensure must be "present" or "absent".')
 
   validate_re($service_ensure, '^(running|true|stopped|false)$',
-  'service_ensure must be "running" or "stopped".')
+    'service_ensure must be "running" or "stopped".')
 
   validate_re($console, '^(log|none|output)$',
-  'console must be "log", "none", or "output".')
+    'console must be "log", "none", or "output".')
 
   validate_re($expect, '^(|fork|daemon|stop)$',
-  'expect must be "fork", "daemon", "stop".')
+    'expect must be "fork", "daemon", "stop".')
 
   validate_bool($service_enable)
   validate_bool($respawn)
@@ -80,8 +80,7 @@ define upstart::job (
     group   => 'root',
     mode    => '0644',
     content => template('upstart/job.erb'),
-  } ->
-  file { "initd_symlink_${name}":
+  } -> file { "initd_symlink_${name}":
     ensure => link,
     path   => "/etc/init.d/${name}",
     target => '/lib/init/upstart-job',
